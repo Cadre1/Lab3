@@ -65,7 +65,7 @@ class MotorDriver:
                     level == 100
                 self.PWM_tim1.pulse_width_percent(level)
                 self.PWM_tim2.pulse_width_percent(0)
-            print (f"Setting duty cycle to {level}")
+            #print (f"Setting duty cycle to {level}")
         except Exception as e:
             print(e)  
           

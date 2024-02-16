@@ -10,7 +10,7 @@ class Encoder:
     """! 
     This class implements the encoder in the motor for an ME405 kit. 
     """
-    def __init__(self, in6pin, in7pin, timer):
+    def __init__(self, in6pin, in7pin, timer, CPR=256):
         """! 
         Creates an encoder by initializing timers as counters given their respective pins 
         @param in6pin The set up X6 encoder pin  
@@ -19,6 +19,7 @@ class Encoder:
         """
         self.prev_count = 0
         self.tot_count = 0
+        self.CPR = CPR 
         
         try:
             # Initialized Counter  
@@ -35,7 +36,7 @@ class Encoder:
             print(e)
 
 
-    def read(self):
+    def read_position(self):
         """!
         This method calculates the current motor position
         and prints out the result. This motor position bypasses
@@ -55,9 +56,20 @@ class Encoder:
             self.tot_count += delta-(AR+1)
         else:
             self.tot_count += delta
-        return self.tot_count
         self.prev_count = count
-        
+        return self.tot_count
+    
+    
+    def convert_count_to_rad(self):
+        self.tot_count
+        return tot_count_rad
+    
+    
+    def read_position_rad(self):
+        pass
+    
+    
+    
         
     def zero(self):
         """!
@@ -86,10 +98,10 @@ if __name__ == "__main__":
     # Hand Test
     while True:
         try:
-            while True:
-                encoder_B.read()
-                encoder_C.read()
-                utime.sleep_ms(100)
+            print(encoder_B.read_position())
+            print(encoder_C.read_position())
+            utime.sleep_ms(100)
         except KeyboardInterrupt:
             encoder_B.zero()
             encoder_C.zero()
+            break
