@@ -61,14 +61,12 @@ class Encoder:
     
     
     def convert_count_to_rad(self):
-        self.tot_count
+        tot_count_rad = self.tot_count*(2*pi()/(CPR*4))
         return tot_count_rad
     
     
     def read_position_rad(self):
-        pass
-    
-    
+        return self.convert_count_to_rad(self.tot_count)
     
         
     def zero(self):

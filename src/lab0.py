@@ -47,21 +47,35 @@ def plot_output(plot_axes, plot_canvas, xlabel, ylabel):
         # Uses readline() method to open file as read and run exceptions
         xlist = [] # List of x-values
         ylist = [] # List of y-values
+        
         # Writes "b'\x04" (Ctrl-D) to reset the serial port and rerun main on microcontroller
+        
+        serial_port.write(b'\x03')
         serial_port.write(b'\x04')
+        # Waits for "Input" to be prompted by microcontroller
         while True:
             line = serial_port.readline().decode('utf-8').strip()
-            print(line)
+            print(f"1 Current Line is {line}")
             if line == "Input":
                 Kp = input("Input Kp: ")
-                serial_port.write(f"{Kp}\n".encode())
+                serial_port.write(f'{Kp}\n'.encode())
                 break
+        # Waits for "Invalid" or "Valid" to be prompted by microcontroller
+        while True:
+            line = serial_port.readline().decode('utf-8').strip()
+            print(f"2 Current Line is {line}")
+            if line == "Invalid":
+                Kp = input("Input a valid Kp: ")
+                serial_port.write(f'{Kp}\n'.encode())
+            elif line == "Valid":
+                break
+        # Waits for the printed out position
         while True:
             # Catches any errors in converting Bytes to Strings
             try:
                 # Reads each line printed by the serial port
                 line = serial_port.readline().decode('utf-8').strip()
-                print(line)                # Skips processing any blank lines
+                # Skips processing any blank lines
                 if line == '':
                     # print("no input")
                     pass
