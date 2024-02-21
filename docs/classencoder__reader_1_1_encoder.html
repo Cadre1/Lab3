@@ -111,13 +111,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a74e686eaab7523d59305dfcad80418ed" id="r_a74e686eaab7523d59305dfcad80418ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74e686eaab7523d59305dfcad80418ed">read_position</a> (self)</td></tr>
 <tr class="memdesc:a74e686eaab7523d59305dfcad80418ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method calculates the current motor position and prints out the result.  <br /></td></tr>
 <tr class="separator:a74e686eaab7523d59305dfcad80418ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad0b30c39f4cc2e5699130f8fe718f9" id="r_a0ad0b30c39f4cc2e5699130f8fe718f9"><td class="memItemLeft" align="right" valign="top"><a id="a0ad0b30c39f4cc2e5699130f8fe718f9" name="a0ad0b30c39f4cc2e5699130f8fe718f9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>convert_count_to_rad</b> (self)</td></tr>
-<tr class="memdesc:a0ad0b30c39f4cc2e5699130f8fe718f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the total count from counts per revolution to radians. <br /></td></tr>
+<tr class="memitem:a0ad0b30c39f4cc2e5699130f8fe718f9" id="r_a0ad0b30c39f4cc2e5699130f8fe718f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ad0b30c39f4cc2e5699130f8fe718f9">convert_count_to_rad</a> (self)</td></tr>
+<tr class="memdesc:a0ad0b30c39f4cc2e5699130f8fe718f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the total count from counts per revolution to radians.  <br /></td></tr>
 <tr class="separator:a0ad0b30c39f4cc2e5699130f8fe718f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7507db2fb5312678342b555cea07b1c6" id="r_a7507db2fb5312678342b555cea07b1c6"><td class="memItemLeft" align="right" valign="top"><a id="a7507db2fb5312678342b555cea07b1c6" name="a7507db2fb5312678342b555cea07b1c6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>read_position_rad</b> (self)</td></tr>
-<tr class="memdesc:a7507db2fb5312678342b555cea07b1c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current motor position in radians. <br /></td></tr>
+<tr class="memitem:a7507db2fb5312678342b555cea07b1c6" id="r_a7507db2fb5312678342b555cea07b1c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7507db2fb5312678342b555cea07b1c6">read_position_rad</a> (self)</td></tr>
+<tr class="memdesc:a7507db2fb5312678342b555cea07b1c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current motor position in radians.  <br /></td></tr>
 <tr class="separator:a7507db2fb5312678342b555cea07b1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f0013ab8cd7010afd07096840604a03" id="r_a4f0013ab8cd7010afd07096840604a03"><td class="memItemLeft" align="right" valign="top"><a id="a4f0013ab8cd7010afd07096840604a03" name="a4f0013ab8cd7010afd07096840604a03"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>zero</b> (self)</td></tr>
@@ -197,6 +195,26 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0ad0b30c39f4cc2e5699130f8fe718f9" name="a0ad0b30c39f4cc2e5699130f8fe718f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad0b30c39f4cc2e5699130f8fe718f9">&#9670;&#160;</a></span>convert_count_to_rad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">encoder_reader.Encoder.convert_count_to_rad </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method converts the total count from counts per revolution to radians. </p>
+<dl class="section return"><dt>Returns</dt><dd>tot_count_rad The total position of the motor in radians </dd></dl>
+
+</div>
+</div>
 <a id="a74e686eaab7523d59305dfcad80418ed" name="a74e686eaab7523d59305dfcad80418ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74e686eaab7523d59305dfcad80418ed">&#9670;&#160;</a></span>read_position()</h2>
 
@@ -213,7 +231,27 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This method calculates the current motor position and prints out the result. </p>
-<p>This motor position bypasses overflow and underflow, meaning it can count below and above the given timer period. </p>
+<p>This motor position bypasses overflow and underflow, meaning it can count below and above the given timer period. </p><dl class="section return"><dt>Returns</dt><dd>tot_count The total count position of the motor </dd></dl>
+
+</div>
+</div>
+<a id="a7507db2fb5312678342b555cea07b1c6" name="a7507db2fb5312678342b555cea07b1c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7507db2fb5312678342b555cea07b1c6">&#9670;&#160;</a></span>read_position_rad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">encoder_reader.Encoder.read_position_rad </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method returns the current motor position in radians. </p>
+<dl class="section return"><dt>Returns</dt><dd>tot_count_rad The total position of the motor in radians </dd></dl>
 
 </div>
 </div>

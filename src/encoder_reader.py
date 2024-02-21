@@ -44,6 +44,7 @@ class Encoder:
         and prints out the result. This motor position bypasses
         overflow and underflow, meaning it can count below and above
         the given timer period.
+        @returns tot_count The total count position of the motor 
         """
         count = self.timer.counter()
         
@@ -65,6 +66,7 @@ class Encoder:
     def convert_count_to_rad(self):
         """!
         This method converts the total count from counts per revolution to radians
+        @returns tot_count_rad The total position of the motor in radians
         """
         tot_count_rad = self.tot_count*(2*(math.pi)/(self.CPR*4))
         return tot_count_rad
@@ -73,6 +75,7 @@ class Encoder:
     def read_position_rad(self):
         """!
         This method returns the current motor position in radians
+        @returns tot_count_rad The total position of the motor in radians
         """
         self.read_position()
         return self.convert_count_to_rad()

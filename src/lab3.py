@@ -95,7 +95,7 @@ def plot_output(plot_axes, plot_canvas, xlabel, ylabel, Kp_var):
                 line = line[:2] # Limits the number of values per line to 2
                 for i, value in enumerate(line):
                     value = value.split('#') # Separates out comments
-                    line[i] = value[0] # Readds non-commented value to list
+                    line[i] = value[0] # Reads non-commented value to list
                     
                 # Tests both values for string or float values
                 try: # Tries to convert each pair of values into a float
