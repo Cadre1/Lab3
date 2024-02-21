@@ -27,7 +27,7 @@ class MotorControl:
         This method takes in the measured output of the plant and returns
         the effort out of the controller
         @param measured_output The current measured output of the plant
-        @returns output The output effort of the proportional controller
+        @returns @param output The output effort of the proportional controller
         """
         time = utime.ticks_ms()
         self.times.append(time)
