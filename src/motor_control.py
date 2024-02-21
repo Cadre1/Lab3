@@ -1,6 +1,6 @@
-"""! @file encoder_reader.py
-This program creates the class "Encoder" which initializes the timers/counters required for the encoder using provided channel pins and a timer/counter.
-This class also contains the ability to set the read the overall motor position (being able to bypass overflow and underflow), and is able to zero at any position.
+"""! @file motor_control.py
+This program creates the class "MotorControl" which initializes the required values for a proportional controller.
+This class also contains the methods to calculate the required effort off of an input position, to set the setpoint and proportional controller gain, and to print out the step response data.
 """
 import utime
 
@@ -59,6 +59,7 @@ class MotorControl:
         measured positions with their respective time relative to the start time
         @param start_time The starting time of the step response
         """
+        # Prints out "time, position" in CSV format
         for i in range(len(self.times)):
             print(f"{self.times[i]-start_time}, {self.positions[i]}")
     

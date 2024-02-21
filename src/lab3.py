@@ -1,7 +1,8 @@
 """!
 @file lab3.py
 Runs a real and simulated dynamic response to a step response and plots the results.
-This program allows for the user to input a desired Kp value and 
+This program allows for the user to input a desired Kp value and, with a connected
+and encoder, will produce a step response for the position of the motor.
 
 This program demonstrates a way to make a simple GUI with a plot in it. It uses Tkinter,
 an old-fashioned and ugly but useful GUI library which is included in Python by default.
@@ -31,6 +32,7 @@ def plot_output(plot_axes, plot_canvas, xlabel, ylabel, Kp_var):
     @param plot_canvas The plot canvas, also supplied by Matplotlib
     @param xlabel The label for the plot's horizontal axis
     @param ylabel The label for the plot's vertical axis
+    @param Kp_var The text entry object for Kp
     """
     
     # Real test data is read through the USB-serial
