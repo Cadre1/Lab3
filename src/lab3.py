@@ -1,9 +1,10 @@
 """!
-@file lab0.py
-Runs a real and simulated dynamic response to a step response and plots the results. This program
-demonstrates a way to make a simple GUI with a plot in it. It uses Tkinter, an
-old-fashioned and ugly but useful GUI library which is included in Python by
-default.
+@file lab3.py
+Runs a real and simulated dynamic response to a step response and plots the results.
+This program allows for the user to input a desired Kp value and 
+
+This program demonstrates a way to make a simple GUI with a plot in it. It uses Tkinter,
+an old-fashioned and ugly but useful GUI library which is included in Python by default.
 
 This file is based loosely on an example found at
 https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.html
@@ -21,7 +22,7 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
 
 
-def plot_output(plot_axes, plot_canvas, xlabel, ylabel):
+def plot_output(plot_axes, plot_canvas, xlabel, ylabel, Kp_var):
     """!
     Collects data from the test run when Run Test is clicked by reseting the step_response
     program on the microcontroller and reading the printed data to the connected COM Port. Then plots
@@ -48,25 +49,29 @@ def plot_output(plot_axes, plot_canvas, xlabel, ylabel):
         xlist = [] # List of x-values
         ylist = [] # List of y-values
         
-        # Writes "b'\x04" (Ctrl-D) to reset the serial port and rerun main on microcontroller
+        # Writes (Ctrl-B, Ctrl-C, Ctrl-D) to reset the serial port and rerun main on microcontroller
         
+        serial_port.write(b'\x02')
         serial_port.write(b'\x03')
         serial_port.write(b'\x04')
         # Waits for "Input" to be prompted by microcontroller
         while True:
             line = serial_port.readline().decode('utf-8').strip()
-            print(f"1 Current Line is {line}")
+            #print(f"1 Current Line is {line}")
             if line == "Input":
-                Kp = input("Input Kp: ")
-                serial_port.write(f'{Kp}\n'.encode())
+                #Kp = input("Input Kp: ")
+                Kp = Kp_var.get()
+                serial_port.write(f'{Kp}\r\n'.encode())
                 break
         # Waits for "Invalid" or "Valid" to be prompted by microcontroller
         while True:
             line = serial_port.readline().decode('utf-8').strip()
-            print(f"2 Current Line is {line}")
+            #print(f"2 Current Line is {line}")
             if line == "Invalid":
-                Kp = input("Input a valid Kp: ")
-                serial_port.write(f'{Kp}\n'.encode())
+                #Kp = input("Input a valid Kp: ")
+                #serial_port.write(f'{Kp}\r\n'.encode())
+                Kp_var.set("Invalid Input")
+                return
             elif line == "Valid":
                 break
         # Waits for the printed out position
@@ -75,6 +80,7 @@ def plot_output(plot_axes, plot_canvas, xlabel, ylabel):
             try:
                 # Reads each line printed by the serial port
                 line = serial_port.readline().decode('utf-8').strip()
+                #print(f"3 Current Line is {line}")
                 # Skips processing any blank lines
                 if line == '':
                     # print("no input")
@@ -138,9 +144,12 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
     toolbar = NavigationToolbar2Tk(canvas, tk_root, pack_toolbar=False)
     toolbar.update()
     
-    # Running main.py on the microcontroller to fix initial run issues
-#     plot_function(axes, canvas, xlabel, ylabel)
-#     axes.clear()
+    # Create an input box
+    Kp_var=tkinter.StringVar()
+    Kp_label = tkinter.Label(master=tk_root,
+                             text = 'Input Kp:')
+    Kp_entry = tkinter.Entry(master=tk_root,
+                             textvariable = Kp_var)
     
     # Create the buttons that run tests, clear the screen, and exit the program
     button_quit = tkinter.Button(master=tk_root,
@@ -152,14 +161,16 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
     button_run = tkinter.Button(master=tk_root,
                                 text="Run Test",
                                 command=lambda: plot_function(axes, canvas,
-                                                              xlabel, ylabel))
+                                                              xlabel, ylabel, Kp_var))
 
     # Arrange things in a grid because "pack" is weird
-    canvas.get_tk_widget().grid(row=0, column=0, columnspan=3)
-    toolbar.grid(row=1, column=0, columnspan=3)
-    button_run.grid(row=2, column=0)
-    button_clear.grid(row=2, column=1)
-    button_quit.grid(row=2, column=2)
+    canvas.get_tk_widget().grid(row=0, column=0, columnspan=5)
+    toolbar.grid(row=1, column=0, columnspan=5)
+    Kp_label.grid(row=2, column=0)
+    Kp_entry.grid(row=2, column=1)
+    button_run.grid(row=2, column=2)
+    button_clear.grid(row=2, column=3)
+    button_quit.grid(row=2, column=4)
 
     # This function runs the program until the user decides to quit
     tkinter.mainloop()

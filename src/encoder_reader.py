@@ -5,6 +5,7 @@ This class also contains the ability to set the read the overall motor position 
 import motor_driver
 import utime
 import pyb
+import math
 
 class Encoder:
     """! 
@@ -16,6 +17,7 @@ class Encoder:
         @param in6pin The set up X6 encoder pin  
         @param in7pin The set up X7 encoder pin
         @param timer The set up counter with AR = period
+        @param CPR The counts per revolution of the motor (assumed 256CPR)
         """
         self.prev_count = 0
         self.tot_count = 0
@@ -61,12 +63,19 @@ class Encoder:
     
     
     def convert_count_to_rad(self):
-        tot_count_rad = self.tot_count*(2*pi()/(CPR*4))
+        """!
+        This method converts the total count from counts per revolution to radians
+        """
+        tot_count_rad = self.tot_count*(2*(math.pi)/(self.CPR*4))
         return tot_count_rad
     
     
     def read_position_rad(self):
-        return self.convert_count_to_rad(self.tot_count)
+        """!
+        This method returns the current motor position in radians
+        """
+        self.read_position()
+        return self.convert_count_to_rad()
     
         
     def zero(self):
@@ -92,6 +101,8 @@ if __name__ == "__main__":
     
     encoder_B = Encoder(pinB6, pinB7, timer_B)
     encoder_C = Encoder(pinC6, pinC7, timer_C)
+    
+    encoder_B.read_position_rad()
     
     # Hand Test
     while True:

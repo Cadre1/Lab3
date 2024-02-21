@@ -17,6 +17,7 @@ if __name__ == "__main__":
 
     # Creating the Motor Driver Object
     moe = motor_driver.MotorDriver(a_pin, in1pin, in2pin, a_timer)
+    moe.enable()
     
     # Encoder setup from Lab2
 
@@ -37,37 +38,20 @@ if __name__ == "__main__":
     # Creating the Motor Controller Object
     moe_con = motor_control.MotorControl(Kp, setpoint)
     
-    utime.sleep_ms(100)
-    # Setting the desired encoder position and Kp
     print("Input")
-    try:
-        val = input('').encode('utf-8')
-    except Exception as e:
-        print(f"something went wrong: {e}")
-        
-    print("test")
-    val = val.decode('utf-8')
-    print(type(val))
-    print(val)
-#     while True:
-#         val = input('').encode('utf-8')
-#         val = val.decode('utf-8')
-#         print(type(val))
-#         print(val)
-#         #try:
-#         val = input()
-#         #val.encode()
-#         print(f"Input is: {val}")
-#         val = val.decode('utf-8')
-#         print(f"Input type is: {type(val)}")
-#         Kp = float(val)
-#         print(f"Final Input type is: {type(Kp)}")
-#         print(f"Final float value is: {Kp}")
-#         except:
-#             print("Invalid")
-#         else:
-#             print("Valid")
-#             break
+    while True:
+        try:
+            val = input()
+            print(f"Input is: {val}")
+            print(f"Input type is: {type(val)}")
+            Kp = float(val)
+            print(f"Final Input type is: {type(Kp)}")
+            print(f"Final float value is: {Kp}")
+        except:
+            print("Invalid")
+        else:
+            print("Valid")
+            break
     
     setpoint = 16000
     moe_con.set_Kp(Kp)
@@ -86,3 +70,4 @@ if __name__ == "__main__":
     print("Start")
     moe_con.print_step_response(start_time)
     print("End")
+    moe.disable()

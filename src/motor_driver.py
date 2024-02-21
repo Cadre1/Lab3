@@ -21,8 +21,7 @@ class MotorDriver:
         try:
             # Initializing Pins
             # Enable Pin
-            en_pin = pyb.Pin(en_pin, pyb.Pin.OUT_PP)
-            en_pin.high()
+            self.en_pin = pyb.Pin(en_pin, pyb.Pin.OUT_PP)
             # IN Pin 1
             in1pin = pyb.Pin(in1pin, pyb.Pin.OUT_PP)
             in1pin.low()
@@ -67,7 +66,22 @@ class MotorDriver:
                 self.PWM_tim2.pulse_width_percent(0)
             #print (f"Setting duty cycle to {level}")
         except Exception as e:
-            print(e)  
+            print(e)
+            
+           
+    def enable(self):
+        """!
+        This method sets the enable pin high 
+        """
+        self.en_pin.high()
+        
+           
+    def disable(self):
+        """!
+        This method sets the enable pin low 
+        """
+        self.en_pin.low()
+        
           
 # Test Code
 if __name__ == "__main__":
